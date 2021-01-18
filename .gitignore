@@ -1,6 +1,3 @@
 # Keeping ignore list small like in the udemy course
 node_modules/
-public/bundle.js
-public/bundle.js.map
-public/styles.css
-public/styles.css.map
+public/dist/
