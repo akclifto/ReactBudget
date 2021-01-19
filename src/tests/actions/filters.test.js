@@ -4,7 +4,7 @@ import {
     setStartDate,
     setEndDate, 
     sortByAmount, 
-    sortbyDate 
+    sortByDate 
 } from '../../actions/filters';
 
 
@@ -52,7 +52,7 @@ test('should generate set text filter action object with default text', () => {
 });
 
 test('should generate sort by date action object', () => {
-    const action = sortbyDate();
+    const action = sortByDate();
 
     expect(action).toEqual({
         type: 'SORT_BY_DATE'

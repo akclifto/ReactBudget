@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DateRangePicker } from 'react-dates';
-import { setTextFilter, sortbyDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
+import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
 import { v4 as uuidv4 } from 'uuid';
 
 //make a text filter to search or find things.  
@@ -21,16 +21,16 @@ export class ExpenseListFilters extends React.Component {
     };
 
     onTextChange = (e) => {
-        this.props.setTextFilter(e.target.value)
+        this.props.setTextFilter(e.target.value);
         // console.log(e.target.value)
     };
 
     onSortChange = (e) => {
         if (e.target.value === 'date') {
-            this.props.sortbyDate();
-        } else if (e.target.value === 'amount') {
+            this.props.sortByDate();
+          } else if (e.target.value === 'amount') {
             this.props.sortByAmount();
-        }
+          }
     };
 
 
@@ -76,10 +76,10 @@ export class ExpenseListFilters extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
 
     setStartDate: (startDate) => dispatch(setStartDate(startDate)),
-    setEndDate: (endDate) => dispatch(setStartDate(endDate)),
-    setTextFilter: (text) => dispatch(setStartDate(text)),
-    sortbyDate: () => dispatch(setStartDate()),
-    sortByAmount: () => dispatch(setStartDate())
+    setEndDate: (endDate) => dispatch(setEndDate(endDate)),
+    setTextFilter: (text) => dispatch(setTextFilter(text)),
+    sortByDate: () => dispatch(sortByDate()),
+    sortByAmount: () => dispatch(sortByAmount())
 });
 
 const mapStateToProps = (state) => {

@@ -6,7 +6,7 @@ import { filters, altFilters } from '../fixtures/filters';
 
 
 let setTextFilter,
-    sortbyDate,
+    sortByDate,
     sortByAmount,
     setStartDate,
     setEndDate,
@@ -14,7 +14,7 @@ let setTextFilter,
 
 beforeEach(() => {
     setTextFilter = jest.fn();
-    sortbyDate = jest.fn();
+    sortByDate = jest.fn();
     sortByAmount = jest.fn();
     setStartDate = jest.fn();
     setEndDate = jest.fn();
@@ -23,7 +23,7 @@ beforeEach(() => {
     wrapper = shallow(
         <ExpenseListFilters
             setTextFilter={setTextFilter}
-            sortbyDate={sortbyDate}
+            sortByDate={sortByDate}
             sortByAmount={sortByAmount}
             setStartDate={setStartDate}
             setEndDate={setEndDate}
@@ -62,7 +62,7 @@ test('should sort by date', () => {
     wrapper.find('select').simulate('change', {
         target: { value }
     });
-    expect(sortbyDate).toHaveBeenCalled();
+    expect(sortByDate).toHaveBeenCalled();
 });
 
 test('should sort by amount', () => {

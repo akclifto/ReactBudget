@@ -18,7 +18,7 @@ export const setEndDate = (endDate) => ({
 });
 
 // SORT_BY_DATE
-export const sortbyDate = () => ({
+export const sortByDate = () => ({
     type: 'SORT_BY_DATE'
 });
 
