@@ -1,24 +1,17 @@
-import selectExpesnsesTotal from '../../selectors/expenses-total';
+import selectExpensesTotal from '../../selectors/expenses-total';
 import expenses from '../fixtures/expenses';
 
-test('should return 0 if no expenses logged', () => {
-
-    const result = selectExpesnsesTotal([]);
-    expect(result).toBe(0);
-
-
+test('should return 0 if no expenses', () => {
+  const res = selectExpensesTotal([]);
+  expect(res).toBe(0);
 });
 
-
-test('should return total for a single expense logged', () => {
-
-    const result = selectExpesnsesTotal([expenses[0]]);
-    expect(result).toBe(1985);
+test('should correctly add up a single expense', () => {
+  const res = selectExpensesTotal([expenses[0]]);
+  expect(res).toBe(195);
 });
 
-
-test('should return total for multiple expenses logged', () => {
-
-    const result = selectExpesnsesTotal(expenses);
-    expect(result).toBe(8485);
+test('should correctly add up multiple expenses', () => {
+  const res = selectExpensesTotal(expenses);
+  expect(res).toBe(114195);
 });

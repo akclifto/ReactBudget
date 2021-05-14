@@ -1,38 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ExpenseListItem from './ExpenseListitem';
-import selectExpenses from '../selectors/get-expenses';
-
+import ExpenseListItem from './ExpenseListItem';
+import selectExpenses from '../selectors/expenses';
 
 export const ExpenseList = (props) => (
-
-    <div>
-        {
-            props.expenses.length === 0 ? (
-                <p> No Expenses in List </p>
-            ) : (
-                props.expenses.map((expense) => {
-                    return <ExpenseListItem key={expense.id} {...expense} />
-                })
-            )
-        }
+  <div className="content-container">
+    <div className="list-header">
+      <div className="show-for-mobile">Expenses</div>
+      <div className="show-for-desktop">Expense</div>
+      <div className="show-for-desktop">Amount</div>
     </div>
-
+    <div className="list-body">
+      {
+        props.expenses.length === 0 ? (
+          <div className="list-item list-item--message">
+            <span>No expenses</span>
+          </div>
+        ) : (
+            props.expenses.map((expense) => {
+              return <ExpenseListItem key={expense.id} {...expense} />;
+            })
+          )
+      }
+    </div>
+  </div>
 );
 
-
 const mapStateToProps = (state) => {
-
-    return {
-        expenses: selectExpenses(state.expenses, state.filters)
-    };
+  return {
+    expenses: selectExpenses(state.expenses, state.filters)
+  };
 };
-
-// We can use connect from redux and the state of the components to access information as needed.  
-// The connect components lets us access info within other components where the structure may be disjointed
-//      meaning, there is no direct link between two components that need to connect information.  
-//      this apparently is pretty common.
-
-//  connect (the state of the props to be mapped)(where the connect will be mapped)
 
 export default connect(mapStateToProps)(ExpenseList);

@@ -1,46 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import AppRouter from './routers/AppRouter';
-import configStore from './store/configStore';
-import { addExpense } from './actions/expenses';
-import {setTextFilter} from './actions/filters';
-import getVisibleExpenses from './selectors/get-expenses';
-
-//these should be the last two imports
+import AppRouter, { history } from './routers/AppRouter';
+import configureStore from './store/configureStore';
+import { startSetExpenses } from './actions/expenses';
+import { login, logout } from './actions/auth';
+import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
+import { firebase } from './firebase/firebase';
+import LoadingPage from './components/LoadingPage';
 
-const store = configStore();
-// console.log('test');
-// console.log(store.getState());
+const store = configureStore();
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, document.getElementById('app'));
+    hasRendered = true;
+  }
+};
 
-// store.dispatch(addExpense( { description: 'Water bill' } ));
-// store.dispatch(addExpense({description: 'Gas bill', amount: 30030, createdAt: '01/01/2020'}));
-// store.dispatch(addExpense({description: 'Tacos Run', amount: 2000, createdAt: '05/05/2020' }));
-// store.dispatch(addExpense({description: 'Rent bill', amount: 100000, createdAt: '06/02/2020'}));
-// store.dispatch(setTextFilter('water'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
-//shows dynamic nature of rendered components with redux, "water" will initial be displayed, 
-// then changed to "gas" using funct below
-// setTimeout(() => {
-//     store.dispatch(setTextFilter('bill'));
-// }, 3000);
-
-// console.log(store.getState());
-
-// const state = store.getState();
-// const visExpenses = getVisibleExpenses(state.expenses, state.filters);
-// console.log(visExpenses);
-
-// store.dispatch(getVisibleExpenses());
-
-const jsx = ( 
-     <Provider store = {store}>
-        <AppRouter />
-     </Provider>
-    );
-
-ReactDOM.render(jsx, document.getElementById('app'));
-
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch(login(user.uid));
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
+      if (history.location.pathname === '/') {
+        history.push('/dashboard');
+      }
+    });
+  } else {
+    store.dispatch(logout());
+    renderApp();
+    history.push('/');
+  }
+});

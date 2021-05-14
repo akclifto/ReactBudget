@@ -1,7 +1,7 @@
-# ReactBudget
+# Git Commands
 
-Udemy course for react.js.  It's an expense tracker.
-
-## Deployed on Heroku
-
-[Budget Chad](https://budget-chad.herokuapp.com/)
+git init - Create a new git repo
+git status - View the changes to your project code
+git add - Add files to staging area
+git commit - Creates a new commit with files from staging area
+git log - View recent commits

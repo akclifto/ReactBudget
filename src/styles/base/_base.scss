@@ -1,29 +1,26 @@
+* {
+  box-sizing: border-box;
+}
 
-
-// This is used to conver rem font-sizes into a base 10 value.  E.g., 1.6rem == 16px
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
-// Body attr
 body {
-    background-color: lightblue;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: $m-size;
+  color: $dark-grey;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+  line-height: 1.6;
 }
 
-
-// Button attr
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button:disabled {
-    cursor: default;
+  cursor: default;
 }
 
-
 .is-active {
-    color: red;
-    font-weight: bold;
+  font-weight: bold;
 }
